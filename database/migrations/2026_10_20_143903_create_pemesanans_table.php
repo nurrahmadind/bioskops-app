@@ -16,7 +16,7 @@ return new class extends Migration
         $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
         $table->foreignId('jadwal_id')->constrained('jadwals')->onDelete('cascade');
         $table->integer('jumlah_tiket');
-        $table->integer('total_bayar');
+        $table->integer('total_harga');
         $table->string('status_pembayaran')->default('Lunas');
         $table->timestamps();
     });

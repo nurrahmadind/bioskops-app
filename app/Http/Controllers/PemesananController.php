@@ -3,63 +3,50 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemesanan;
+use App\Models\Jadwal;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PemesananController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Jika admin, lihat semua pemesanan. Jika user biasa, lihat pemesanan miliknya sendiri.
+        if (Auth::user()->role === 'admin') {
+            $pemesanans = Pemesanan::with(['user', 'jadwal.film'])->latest()->get();
+        } else {
+            $pemesanans = Pemesanan::with(['user', 'jadwal.film'])->where('user_id', Auth::id())->latest()->get();
+        }
+
+        return view('pemesanans.index', compact('pemesanans'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $jadwals = Jadwal::with('film')->get();
+        return view('pemesanans.create', compact('jadwals'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'jadwal_id' => 'required|exists:jadwals,id',
+            'jumlah_tiket' => 'required|integer|min:1',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Pemesanan $pemesanan)
-    {
-        //
-    }
+        // Ambil data jadwal untuk mendapatkan harga
+        $jadwal = Jadwal::findOrFail($request->jadwal_id);
+        
+        // Hitung total harga otomatis
+        $totalHarga = $jadwal->harga * $request->jumlah_tiket;
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Pemesanan $pemesanan)
-    {
-        //
-    }
+        Pemesanan::create([
+            'user_id' => Auth::id(), // ID user yang sedang login
+            'jadwal_id' => $request->jadwal_id,
+            'jumlah_tiket' => $request->jumlah_tiket,
+            'total_harga' => $totalHarga,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pemesanan $pemesanan)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Pemesanan $pemesanan)
-    {
-        //
+        return redirect()->route('pemesanans.index')->with('success', 'Tiket berhasil dipesan!');
     }
 }

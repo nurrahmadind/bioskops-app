@@ -11,7 +11,6 @@ class JadwalController extends Controller
     // 1. Menampilkan daftar jadwal
     public function index()
     {
-        // Gunakan .with('film') agar relasi film ikut terambil (Eager Loading)
         $jadwals = Jadwal::with('film')->latest()->get();
         return view('admin.jadwals.index', compact('jadwals'));
     }
@@ -19,7 +18,7 @@ class JadwalController extends Controller
     // 2. Menampilkan form tambah jadwal
     public function create()
     {
-        $films = Film::all(); // Ambil semua film untuk dropdown
+        $films = Film::all();
         return view('admin.jadwals.create', compact('films'));
     }
 
@@ -33,12 +32,11 @@ class JadwalController extends Controller
             'harga' => 'required|numeric|min:1000',
         ]);
 
-        // Gabungkan tanggal dan jam menjadi satu string format 'Y-m-d H:i:s'
-        $waktuTayang = $request->tanggal . ' ' . $request->jam . ':00';
-
+        // Langsung masukkan ke kolom database: tanggal_tayang & jam_tayang
         Jadwal::create([
             'film_id' => $request->film_id,
-            'waktu_tayang' => $waktuTayang,
+            'tanggal_tayang' => $request->tanggal,
+            'jam_tayang' => $request->jam,
             'harga' => $request->harga,
         ]);
 
@@ -49,7 +47,6 @@ class JadwalController extends Controller
     public function edit(Jadwal $jadwal)
     {
         $films = Film::all();
-        // Jadwal otomatis terambil karena menggunakan Model Binding
         return view('admin.jadwals.edit', compact('jadwal', 'films'));
     }
 
@@ -63,12 +60,10 @@ class JadwalController extends Controller
             'harga' => 'required|numeric|min:1000',
         ]);
 
-        // Gabungkan tanggal dan jam yang baru
-        $waktuTayang = $request->tanggal . ' ' . $request->jam . ':00';
-
         $jadwal->update([
             'film_id' => $request->film_id,
-            'waktu_tayang' => $waktuTayang,
+            'tanggal_tayang' => $request->tanggal,
+            'jam_tayang' => $request->jam,
             'harga' => $request->harga,
         ]);
 

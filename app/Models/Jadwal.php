@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory; // <--- Tambahkan baris ini
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
@@ -11,7 +11,8 @@ class Jadwal extends Model
 
     protected $fillable = [
         'film_id',
-        'waktu_tayang',
+        'tanggal_tayang',
+        'jam_tayang',
         'harga',
     ];
 

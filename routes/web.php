@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\JadwalController;
+use App\Http\Controllers\PemesananController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -26,6 +27,7 @@ Route::middleware('auth')->group(function () {
     })->name('admin.dashboard');
     Route::resource('admin/films', FilmController::class);
     Route::resource('admin/jadwals', JadwalController::class);
+    Route::resource('pemesanans', \App\Http\Controllers\PemesananController::class);
 });
 
 require __DIR__.'/auth.php';
