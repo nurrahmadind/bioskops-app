@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PemesananController;
+use App\Http\Controllers\LaporanController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -28,6 +29,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin/films', FilmController::class);
     Route::resource('admin/jadwals', JadwalController::class);
     Route::resource('pemesanans', \App\Http\Controllers\PemesananController::class);
+    Route::get('/laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
 });
 
 require __DIR__.'/auth.php';

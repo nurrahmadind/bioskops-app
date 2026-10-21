@@ -24,7 +24,7 @@
                     </a>
 
                     <!-- Menu Laporan Pemesanan -->
-                    <a href="#" class="p-6 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition text-center font-semibold">
+                    <a href="{{ route('laporan.index') }}" class="p-6 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition text-center font-semibold">
                         📊 Laporan Pemesanan
                     </a>
                 </div>
