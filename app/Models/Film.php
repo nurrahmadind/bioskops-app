@@ -13,7 +13,6 @@ class Film extends Model
     protected $fillable = [
         'judul_film',
         'genre',
-        'poster',
     ];
 
     public function jadwals()

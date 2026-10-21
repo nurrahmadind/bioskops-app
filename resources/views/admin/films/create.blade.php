@@ -9,7 +9,7 @@
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
                 
-                <form action="{{ route('films.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('films.store') }}" method="POST">
                     @csrf
 
                     <!-- Judul Film -->
@@ -26,15 +26,6 @@
                         <label for="genre" class="block text-gray-700 font-bold mb-2">Genre</label>
                         <input type="text" name="genre" id="genre" value="{{ old('genre') }}" placeholder="Contoh: Horor, Aksi, Komedi" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                         @error('genre')
-                            <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
-                        @enderror
-                    </div>
-
-                    <!-- Poster Film -->
-                    <div class="mb-6">
-                        <label for="poster" class="block text-gray-700 font-bold mb-2">Poster Film (Opsional)</label>
-                        <input type="file" name="poster" id="poster" class="w-full border-gray-300 rounded-md shadow-sm">
-                        @error('poster')
                             <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                         @enderror
                     </div>

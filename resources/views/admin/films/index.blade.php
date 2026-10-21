@@ -24,7 +24,6 @@
                 <table class="min-w-full divide-y divide-gray-200 mt-4">
                     <thead>
                         <tr>
-                            <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Poster</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Judul Film</th>
                             <th class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Genre</th>
                             <th class="px-6 py-3 bg-gray-50 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
@@ -33,13 +32,6 @@
                     <tbody class="bg-white divide-y divide-gray-200">
                         @forelse($films as $film)
                             <tr>
-                                <td class="px-6 py-4 whitespace-nowrap">
-                                    @if($film->poster)
-                                        <img src="{{ asset('storage/' . $film->poster) }}" alt="Poster" class="h-16 w-12 object-cover rounded">
-                                    @else
-                                        <span class="text-gray-400 text-xs">Tidak ada</span>
-                                    @endif
-                                </td>
                                 <td class="px-6 py-4 whitespace-nowrap font-semibold">{{ $film->judul_film }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap">{{ $film->genre }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-center">

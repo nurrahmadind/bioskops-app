@@ -2,17 +2,21 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory; // <--- Tambahkan baris ini
 use Illuminate\Database\Eloquent\Model;
 
 class Jadwal extends Model
 {
-    public function film()
-{
-    return $this->belongsTo(Film::class);
-}
+    use HasFactory;
 
-    public function pemesanans()
-{
-    return $this->hasMany(Pemesanan::class);
-}
+    protected $fillable = [
+        'film_id',
+        'waktu_tayang',
+        'harga',
+    ];
+
+    public function film()
+    {
+        return $this->belongsTo(Film::class);
+    }
 }

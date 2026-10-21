@@ -25,19 +25,6 @@
                         <input type="text" name="genre" id="genre" value="{{ old('genre', $film->genre) }}" class="w-full border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500" required>
                     </div>
 
-                    <!-- Poster Film Saat Ini -->
-                    @if($film->poster)
-                        <div class="mb-4">
-                            <label class="block text-gray-700 font-bold mb-2">Poster Saat Ini</label>
-                            <img src="{{ asset('storage/' . $film->poster) }}" alt="Poster" class="h-24 w-20 object-cover rounded mb-2">
-                        </div>
-                    @endif
-
-                    <!-- Upload Poster Baru -->
-                    <div class="mb-6">
-                        <label for="poster" class="block text-gray-700 font-bold mb-2">Ganti Poster (Kosongkan jika tidak diubah)</label>
-                        <input type="file" name="poster" id="poster" class="w-full border-gray-300 rounded-md shadow-sm">
-                    </div>
 
                     <!-- Tombol Aksi -->
                     <div class="flex justify-between">
