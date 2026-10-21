@@ -15,7 +15,6 @@ return new class extends Migration
         $table->id();
         $table->string('judul_film');
         $table->string('genre');
-        $table->string('poster')->nullable();
         $table->timestamps();
     });
     }
