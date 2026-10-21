@@ -6,6 +6,7 @@ use App\Http\Controllers\FilmController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\UserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('admin/jadwals', JadwalController::class);
     Route::resource('pemesanans', \App\Http\Controllers\PemesananController::class);
     Route::get('/laporan', [\App\Http\Controllers\LaporanController::class, 'index'])->name('laporan.index');
+    Route::resource('penontons', UserController::class);
 });
 
 require __DIR__.'/auth.php';

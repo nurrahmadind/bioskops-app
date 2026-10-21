@@ -27,6 +27,10 @@
                     <a href="{{ route('laporan.index') }}" class="p-6 bg-purple-500 text-white rounded-lg shadow hover:bg-purple-600 transition text-center font-semibold">
                         📊 Laporan Pemesanan
                     </a>
+                    <!-- Menu Penonton -->
+                     <a href="{{ route('penontons.index') }}" class="p-6 bg-yellow-500 text-white rounded-lg shadow hover:bg-yellow-600 transition text-center font-semibold">
+                        👥 Kelola Penonton
+                     </a>   
                 </div>
             </div>
         </div>
